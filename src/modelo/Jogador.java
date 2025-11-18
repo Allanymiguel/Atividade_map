@@ -20,7 +20,7 @@ public class Jogador {
 		this.timeAtual = timeAtual;
 		this.idade = idade;
 		this.altura = altura;
-		this.habilidades = habilidades;
+		this.habilidades = (habilidades != null) ? new ArrayList<>(habilidades) : new ArrayList<>();
 		this.posicao = posicao;
 	}
 

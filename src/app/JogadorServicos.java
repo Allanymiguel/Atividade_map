@@ -95,9 +95,8 @@ public class JogadorServicos {
 	}
 
 	private static float converterAltura(String s) {
-		s.replace(".", ",");
-
-		return Float.parseFloat(s);
+	    s = s.replace(",", ".");
+	    return Float.parseFloat(s);
 	}
 
 	private static List<Habilidade> lerHabilidades() {

@@ -29,6 +29,9 @@ public class Habilidade {
 	}
 
 	public void setNivel(int nivel) {
+		if (nivel < 0) { 
+	        throw new IllegalArgumentException("O nível não pode ser negativo.");
+	    }
 	    this.nivel = nivel;
 	}
 

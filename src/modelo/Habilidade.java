@@ -26,7 +26,10 @@ public class Habilidade {
 	}
 
 	public void setNivel(int nivel) {
-		this.nivel = nivel;
+	    if (nivel < 0 || nivel > 100) { 
+	        throw new IllegalArgumentException("O nível deve ficar entre 0 e 100.");
+	    }
+	    this.nivel = nivel;
 	}
 
 	@Override

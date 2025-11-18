@@ -14,7 +14,10 @@ public class Habilidade {
 	 */
 	public Habilidade(TipoHabilidade habilidade, int nivel) {
 		this.habilidade = habilidade;
-		this.nivel = nivel;
+		if (nivel < 0) {
+	        throw new IllegalArgumentException("O nível não pode ser negativo.");
+	    }
+	    this.nivel = nivel;
 	}
 
 	public TipoHabilidade getHabilidade() {
@@ -26,7 +29,10 @@ public class Habilidade {
 	}
 
 	public void setNivel(int nivel) {
-		this.nivel = nivel;
+		if (nivel < 0) { 
+	        throw new IllegalArgumentException("O nível não pode ser negativo.");
+	    }
+	    this.nivel = nivel;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import modelo.Posicao;
 import modelo.TipoHabilidade;
 
 public class JogadorServicos {
-	
+
 	private static final Scanner scan = new Scanner(System.in);
 
 	public static int menu() {
@@ -56,18 +56,25 @@ public class JogadorServicos {
 		}
 		map.put(id, lerDadosJogador());
 
-		System.out.println("Jogador atualaizado!");
+		System.out.println("Jogador atualizado!");
 	}
 
-	static void imprimirJogadores(Map<Integer, Jogador> map) {
+	public static void imprimirJogadores(Map<Integer, Jogador> map) {
 		System.out.println(map);
 	}
 
-	static void removerJogador(Map<Integer, Jogador> map) {
+	public static void removerJogador(Map<Integer, Jogador> map) {
 		imprimirJogadores(map);
 		System.out.println("Informe o ID do jogador que deseja remover.");
-		map.remove(scan.nextInt());
+		int id = scan.nextInt();
 		scan.nextLine();
+
+		if (map.containsKey(id)) {
+			map.remove(id);
+			System.out.println("Jogador removido com sucesso!");
+		} else {
+			System.out.println("ID não encontrado. Nenhum jogador foi removido.");
+		}
 	}
 
 	public static Jogador lerDadosJogador() {
@@ -88,27 +95,33 @@ public class JogadorServicos {
 	}
 
 	private static float converterAltura(String s) {
-		s.replace(".", ",");
-
+		s = s.replace(",", ".");
 		return Float.parseFloat(s);
 	}
 
 	private static List<Habilidade> lerHabilidades() {
 		List<Habilidade> habilidades = new ArrayList<>();
-		do {
+
+		TipoHabilidade habilidade = null;
+		while (habilidade == null) {
 			System.out.println("Informe a habilidade.");
 			imprimirHabilidades();
-			System.out.println("Digite o númeoro da habilidade que deseja: ");
+			System.out.println("Digite o número da habilidade que deseja: ");
 			int escolhaHabilidade = scan.nextInt();
 			scan.nextLine();
-			TipoHabilidade habilidade = TipoHabilidade.values()[escolhaHabilidade - 1];
-			System.out.println("De 0 - 100, informe o nível de " + habilidade.getNome() + " do jogador: ");
-			int nivel = scan.nextInt();
-			scan.nextLine();
+			if (escolhaHabilidade > 0 && escolhaHabilidade < TipoHabilidade.values().length) {
+				habilidade = TipoHabilidade.values()[escolhaHabilidade - 1];
+			} else {
+				System.out.println("Opção inválida. Tente novamente!");
+			}
 
-			habilidades.add(new Habilidade(habilidade, nivel));
+		}
+		
+		System.out.println("De 0 - 100, informe o nível de " + habilidade + " do jogador: ");
+		int nivel = scan.nextInt();
+		scan.nextLine();
 
-		} while (continuarLendoHabilidade());
+		habilidades.add(new Habilidade(habilidade, nivel));
 
 		return habilidades;
 

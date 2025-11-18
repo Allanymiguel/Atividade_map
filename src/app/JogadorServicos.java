@@ -59,15 +59,22 @@ public class JogadorServicos {
 		System.out.println("Jogador atualizado!");
 	}
 
-	static void imprimirJogadores(Map<Integer, Jogador> map) {
+	public static void imprimirJogadores(Map<Integer, Jogador> map) {
 		System.out.println(map);
 	}
 
-	static void removerJogador(Map<Integer, Jogador> map) {
-		imprimirJogadores(map);
-		System.out.println("Informe o ID do jogador que deseja remover.");
-		map.remove(scan.nextInt());
-		scan.nextLine();
+	public static void removerJogador(Map<Integer, Jogador> map) {
+	    imprimirJogadores(map);
+	    System.out.println("Informe o ID do jogador que deseja remover.");
+	    int id = scan.nextInt();
+	    scan.nextLine();
+
+	    if (map.containsKey(id)) {
+	        map.remove(id);
+	        System.out.println("Jogador removido com sucesso!");
+	    } else {
+	        System.out.println("ID não encontrado. Nenhum jogador foi removido.");
+	    }
 	}
 
 	public static Jogador lerDadosJogador() {

@@ -56,7 +56,7 @@ public class JogadorServicos {
 		}
 		map.put(id, lerDadosJogador());
 
-		System.out.println("Jogador atualaizado!");
+		System.out.println("Jogador atualizado!");
 	}
 
 	static void imprimirJogadores(Map<Integer, Jogador> map) {

@@ -12,7 +12,7 @@ import modelo.Posicao;
 import modelo.TipoHabilidade;
 
 public class JogadorServicos {
-	
+
 	private static final Scanner scan = new Scanner(System.in);
 
 	public static int menu() {
@@ -40,7 +40,7 @@ public class JogadorServicos {
 
 		while (id == null) {
 			try {
-				System.out.println("Digite o número do jogador que deseja atualizar: ");
+				System.out.println("\nDigite o número do jogador que deseja atualizar: ");
 				int numeroJogador = scan.nextInt();
 				scan.nextLine();
 
@@ -56,18 +56,23 @@ public class JogadorServicos {
 		}
 		map.put(id, lerDadosJogador());
 
-		System.out.println("Jogador atualaizado!");
+		System.out.println("Jogador atualizado!");
 	}
 
 	static void imprimirJogadores(Map<Integer, Jogador> map) {
 		System.out.println(map);
 	}
 
-	static void removerJogador(Map<Integer, Jogador> map) {
+	static boolean removerJogador(Map<Integer, Jogador> map) {
 		imprimirJogadores(map);
 		System.out.println("Informe o ID do jogador que deseja remover.");
-		map.remove(scan.nextInt());
+		int id = scan.nextInt();
+		map.remove(id);
 		scan.nextLine();
+		
+		if(map.containsKey(id))
+			return false;
+		else return true;
 	}
 
 	public static Jogador lerDadosJogador() {
@@ -78,7 +83,7 @@ public class JogadorServicos {
 		System.out.println("Informe a idade do jogador: ");
 		int idade = scan.nextInt();
 		scan.nextLine();
-		System.out.println("Informe a altura do jogador: ");
+		System.out.println("Informe a altura do jogador(exemplo: 1.80): ");
 		float altura = converterAltura(scan.nextLine());
 
 		List<Habilidade> habilidades = lerHabilidades();
@@ -96,17 +101,29 @@ public class JogadorServicos {
 	private static List<Habilidade> lerHabilidades() {
 		List<Habilidade> habilidades = new ArrayList<>();
 		do {
-			System.out.println("Informe a habilidade.");
 			imprimirHabilidades();
-			System.out.println("Digite o númeoro da habilidade que deseja: ");
+			System.out.println("Digite apenas o número da habilidade que deseja: ");
 			int escolhaHabilidade = scan.nextInt();
 			scan.nextLine();
 			TipoHabilidade habilidade = TipoHabilidade.values()[escolhaHabilidade - 1];
-			System.out.println("De 0 - 100, informe o nível de " + habilidade.getNome() + " do jogador: ");
-			int nivel = scan.nextInt();
-			scan.nextLine();
 
-			habilidades.add(new Habilidade(habilidade, nivel));
+			boolean existe = false;
+
+			for (Habilidade h : habilidades) {
+				if (h.getHabilidade() == habilidade) {
+					existe = true;
+					break;
+				}
+			}
+			if (existe) {
+				System.out.println("Não foi possível adicionar. Habilidade " + habilidade + " já foi adicionada.");
+			} else {
+				System.out.println("De 0 - 100, informe o nível de " + habilidade + " do jogador: ");
+				int nivel = scan.nextInt();
+				scan.nextLine();
+
+				habilidades.add(new Habilidade(habilidade, nivel));
+			}
 
 		} while (continuarLendoHabilidade());
 

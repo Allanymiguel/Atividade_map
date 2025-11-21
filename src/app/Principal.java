@@ -27,10 +27,16 @@ public class Principal {
 				JogadorServicos.imprimirJogadores(map);
 				break;
 			case 4:
-				JogadorServicos.removerJogador(map);
+				if (JogadorServicos.removerJogador(map)) {
+					System.out.println("Jogador removido com sucesso.");
+				} else {
+					System.out.println("Não foi possível remover jogador.");
+				}
+				;
 				break;
 			case 0:
 				ligado = false;
+				System.out.println("Finalizando programa...");
 				break;
 			default:
 				System.out.println("Opção inválida!");

@@ -94,7 +94,7 @@ public class Jogador {
 	@Override
 	public String toString() {
 		return "Nome do jogador: " + getNome() + "\nTime tual: " + getTimeAtual() + "\nIdade: " + getIdade()
-				+ "\nAltura: " + getAltura() + "\n" + "Habilidades: " + habilidades + "\nPosição" + posicao;
+				+ "\nAltura: " + getAltura() + "\n" + "Habilidades: " + habilidades + "\nPosição: " + posicao + "\n";
 	}
 
 }

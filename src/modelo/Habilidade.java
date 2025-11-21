@@ -14,7 +14,14 @@ public class Habilidade {
 	 */
 	public Habilidade(TipoHabilidade habilidade, int nivel) {
 		this.habilidade = habilidade;
-		this.nivel = nivel;
+
+		if (nivel < 0)
+			this.nivel = 0;
+		else if (nivel > 100)
+			this.nivel = 100;
+		else
+			this.nivel = nivel;
+
 	}
 
 	public TipoHabilidade getHabilidade() {
